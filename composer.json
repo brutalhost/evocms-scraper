@@ -1,0 +1,19 @@
+{
+  "name": "brutalhost/evocms-scraper",
+  "description": "Scraper module for evocms 3.x",
+  "autoload": {
+    "psr-4": {
+      "EvolutionCMS\\Scraper\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "EvolutionCMS\\Scraper\\ScraperServiceProvider"
+      ]
+    }
+  },
+  "require": {
+    "wa72/htmlpagedom": "^3.0"
+  }
+}
