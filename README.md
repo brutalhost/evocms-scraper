@@ -1,8 +1,8 @@
 # Scraper - парсер статических сайтов
 ## Установка
-```cd core```
-```php -d="memory_limit=-1" artisan package:installrequire brutalhost/evocms-scraper "*"```
-```php artisan vendor:publish --provider="EvolutionCMS\Scraper\ScraperServiceProvider"```
+```cd core```  
+```php -d="memory_limit=-1" artisan package:installrequire brutalhost/evocms-scraper "*"```  
+```php artisan vendor:publish --provider="EvolutionCMS\Scraper\ScraperServiceProvider"```  
 ```php artisan migrate```
 ## Использование
 Для использования модуля откройте его и прочтите короткую инструкцию внутри админ-панели. Пользовательский интерфейс интуитивно понятен.
