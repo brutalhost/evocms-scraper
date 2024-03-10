@@ -102,19 +102,19 @@ class FourPdaParser extends AbstractParser
 Выполняетя через интерфейс модуля, либо с помощью artisan команд.
 
 ```php artisan scraper:process {task?} {--with-completed} { --with-unfinished} {--ignore-timestamp}```  
-Начинает обработку задачи со статусом Created.
+Начинает обработку задания со статусом Created.
 
 ```php artisan scraper:process 13```  
-Запустить обработку задачи с идентификатором 13, даже если она уже обработана.
+Запустить обработку задания с идентификатором 13, даже если она уже обработана.
 
 ```php artisan scraper:process --with-completed```  
-Обработка задачи со статусом Created или Completed.
+Обработка задания со статусом Created или Completed.
 
 ```php artisan scraper:process --with-unfinished --with-completed```  
-Обработка задачи со статусом Created, Unfinished или Completed.
+Обработка задания со статусом Created, Unfinished или Completed.
 
 ```php artisan scraper:process --ignore-timestamp```  
 Игнорирует поле метки времени.
 
 ```php artisan scraper:mark-tasks```  
-Изменяет статус на Created для всех задач Completed, к которым не прикреплены документы.
+Изменяет статус на Created для всех заданий Completed, к которым не прикреплены документы.
