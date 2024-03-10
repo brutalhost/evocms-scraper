@@ -37,7 +37,7 @@ class ProcessTask extends Command
             $task = $task->where('timestamp', '<', now());
         }
 
-        $task = $task->limit(1)->get();
+        $task = $task->orderBy('timestamp', 'asc')->limit(1)->get();
 
         if ($task->isEmpty()) {
             if (is_null($taskId)) {
