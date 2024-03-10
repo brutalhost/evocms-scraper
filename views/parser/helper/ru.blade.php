@@ -1,5 +1,5 @@
 <h2 class="code-line" data-line-start=0 data-line-end=1><a id="___0"></a>Инструкция модуля</h2>
-<h3 class="code-line" data-line-start=1 data-line-end=2><a id="__1"></a>Скрипт парсеров</h3>
+<h3 class="code-line" data-line-start=1 data-line-end=2><a id="__1"></a>Скрипты парсеров</h3>
 <p class="has-line-data" data-line-start="2" data-line-end="3">Список классов находится в файле конфигурации <code>/project/core/custom/configs/scraper.php</code>.</p>
 <p class="has-line-data" data-line-start="4" data-line-end="5">Вы можете как создавать классы с нуля, так и наследоваться от <code>EvolutionCMS\Scraper\Services\Parsers\AbstractParser</code>. Для лучшего понимания,
     изучите исходные файлы парсеров, поставляемых с модулем.</p>
