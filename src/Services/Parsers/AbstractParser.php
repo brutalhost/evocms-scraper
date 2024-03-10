@@ -9,7 +9,6 @@ use EvolutionCMS\Scraper\Services\Interfaces\Parser;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 use Wa72\HtmlPageDom\HtmlPage;
 
 abstract class AbstractParser implements Parser
@@ -57,17 +56,11 @@ abstract class AbstractParser implements Parser
         return $utf8_body;
     }
 
-    function beforeProcess()
-    {
-        // Adding pagetitle field to $documentObject
-    }
+    abstract function beforeProcess();
 
     abstract public function processHtml();
 
-    function afterProcess()
-    {
-        // Add content from $htmlPage to $documentObject
-    }
+    abstract public function afterProcess();
 
     function saveData()
     {

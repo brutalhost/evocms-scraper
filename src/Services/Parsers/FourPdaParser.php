@@ -7,6 +7,11 @@ use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class FourPdaParser extends AbstractParser
 {
+    /*
+     * $this->htmlPage - экземпляр Wa72\HtmlPageDom\HtmlPage, в котором уже присутствует DOM дерево нужного сайта
+     * $this->documentObject - страница Evolution CMS
+     * $this->task - экземпляр модели Task, содержит информацию о задаче
+     * */
     public function beforeProcess()
     {
         $title                           = str_replace(' - 4PDA', '', $this->htmlPage->getTitle());
@@ -15,22 +20,26 @@ class FourPdaParser extends AbstractParser
 
     public function processHtml()
     {
+        // заносим в $c контентную часть, с которой будем работать
         $siteContent = $this->htmlPage->getCrawler()->filter('.content-box')->getInnerHtml();
         $c           = new HtmlPage($siteContent);
 
+        // удаляем аттрибуты, которые сильно влияют на отображение
         $c->filter('*')->removeAttr('style')->removeAttr('width')->removeAttr('height');
 
-        // remove source paragraph
+        // удаляем блок с источником информации
         $c->filter('.mb_source')->remove();
 
-        // remove empty <p></p>
+        // удаляем пустые <p></p>
         $c->filter('p')->each(function (HtmlPageCrawler $node) {
             if ($node->innerText() == '') {
+                // замещает текущую node дочерними node, если они существуют
+                // если дочерних node нет - замещение пустотой
                 $node->replaceWith($node->getInnerHtml());
             }
         });
 
-        // caption
+        // картинки с описаниями
         $c->filter('.wp-caption')->each(function (HtmlPageCrawler $node) {
             $node->replaceWith('<figure class="figure">'.$node->getInnerHtml().'</figure>');
         });
@@ -42,7 +51,7 @@ class FourPdaParser extends AbstractParser
         $c->filter('blockquote')->addClass('blockquote');
         $c->filter("img")->removeAttr('class')->addClass("img-fluid");
 
-        // list of images
+        // список изображений, убираем точки сбоку
         $c->filter('.galContainer')->addClass('list-unstyled');
 
         $this->htmlPage = $c;
