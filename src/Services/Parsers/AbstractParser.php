@@ -44,13 +44,12 @@ abstract class AbstractParser implements Parser
 
     function getContent(): string
     {
-
         $url = $this->task->url;
         $client = new Client();
         $response   = $client->get($url);
         $type = preg_replace('/.*charset=/', '', $response->getHeader('content-type')[0]);
 
-        $original_body = (string)$response->getBody()->getContents();
+        $original_body = $response->getBody()->getContents();
         $utf8_body = mb_convert_encoding($original_body, 'UTF-8', $type ?: 'UTF-8');
 
         return $utf8_body;

@@ -8,9 +8,9 @@ use Wa72\HtmlPageDom\HtmlPageCrawler;
 class FourPdaParser extends AbstractParser
 {
     /*
-     * $this->htmlPage - экземпляр Wa72\HtmlPageDom\HtmlPage, в котором уже присутствует DOM дерево нужного сайта
-     * $this->documentObject - страница Evolution CMS
-     * $this->task - экземпляр модели Task, содержит информацию о задаче
+     * $this->htmlPage - экземпляр Wa72\HtmlPageDom\HtmlPage; здесь хранится ответ, полученный при обращении к url из задания
+     * $this->documentObject - стандартная страница Evolution CMS; сама создаётся либо перезаписывается уже существующая
+     * $this->task - обрабатываемое задание (модель Task)
      * */
     public function beforeProcess()
     {
@@ -23,13 +23,10 @@ class FourPdaParser extends AbstractParser
         // заносим в $c контентную часть, с которой будем работать
         $siteContent = $this->htmlPage->getCrawler()->filter('.content-box')->getInnerHtml();
         $c           = new HtmlPage($siteContent);
-
         // удаляем аттрибуты, которые сильно влияют на отображение
         $c->filter('*')->removeAttr('style')->removeAttr('width')->removeAttr('height');
-
         // удаляем блок с источником информации
         $c->filter('.mb_source')->remove();
-
         // удаляем пустые <p></p>
         $c->filter('p')->each(function (HtmlPageCrawler $node) {
             if ($node->innerText() == '') {
@@ -38,7 +35,6 @@ class FourPdaParser extends AbstractParser
                 $node->replaceWith($node->getInnerHtml());
             }
         });
-
         // картинки с описаниями
         $c->filter('.wp-caption')->each(function (HtmlPageCrawler $node) {
             $node->replaceWith('<figure class="figure">'.$node->getInnerHtml().'</figure>');
@@ -47,13 +43,10 @@ class FourPdaParser extends AbstractParser
         $c->filter('.wp-caption-dd')->each(function (HtmlPageCrawler $node) {
             $node->replaceWith('<figcaption  class="figure-caption">'.$node->getInnerHtml().'</figcaption>');
         });
-
         $c->filter('blockquote')->addClass('blockquote');
         $c->filter("img")->removeAttr('class')->addClass("img-fluid");
-
-        // список изображений, убираем точки сбоку
+        // изображения в неупорядоченном списке, удаляем стандартные точки сбоку от <li>
         $c->filter('.galContainer')->addClass('list-unstyled');
-
         $this->htmlPage = $c;
     }
 
