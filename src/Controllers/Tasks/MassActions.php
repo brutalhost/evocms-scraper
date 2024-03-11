@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Validator;
 
 class MassActions extends Controller
 {
-    public Collection | null  $tasks;
+    public Collection|null $tasks;
 
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $validator = Validator::make($request->only('mass_action'), [
+            $validator   = Validator::make($request->only('mass_action'), [
                 'mass_action'   => 'nullable',
                 'mass_action.*' => 'integer',
             ]);
-            $taskIds = $validator->validate()['mass_action'];
+            $taskIds     = $validator->validate()['mass_action'];
             $this->tasks = is_null($taskIds) ? null : Task::whereIn('id', $taskIds)->get();
 
             if (is_null($this->tasks)) {
@@ -45,7 +45,7 @@ class MassActions extends Controller
     public function process(Request $request)
     {
         foreach ($this->tasks as $task) {
-            exec('cd "'.EVO_CORE_PATH.'" && php artisan scraper:process '.$task->id . ' --force');
+            exec('cd "'.EVO_CORE_PATH.'" && php artisan scraper:process '.$task->id);
         }
 
         session()->flash('success', trans_choice('scraper::global.tasks_processed', 2));
