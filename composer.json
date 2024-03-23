@@ -1,6 +1,7 @@
 {
   "name": "brutalhost/evocms-scraper",
   "description": "Scraper module for evocms 3.x",
+  "version": "0.1.0",
   "autoload": {
     "psr-4": {
       "EvolutionCMS\\Scraper\\": "src"
