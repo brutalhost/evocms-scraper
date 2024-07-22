@@ -1,7 +1,7 @@
 <?php include_once MODX_MANAGER_PATH . 'includes/header.inc.php' ?>
 
 
-<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<script src="https://unpkg.com/htmx.org@2.0.1"></script>
 
 <style>
     .pagination {
