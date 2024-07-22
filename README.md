@@ -1,8 +1,6 @@
 # Scraper - парсер статических сайтов для Evolution CMS
 Парсер статических сайтов для Evolution CMS. Модуль написан на Laravel компонентах, совместим только с Evo 3. Для работы с DOM деревом используется библиотека [wasinger/htmlpagedom](https://github.com/wasinger/htmlpagedom "wasinger/htmlpagedom").
 
-[[github модуля]](https://github.com/brutalhost/evocms-scraper "[github модуля]")
-
 ![Форма парсера](https://community.evocms.ru/assets/images/uploads/2045/IXNoKte8fgz8FHK.png "Форма парсера")
 ![Список задач](https://community.evocms.ru/assets/images/uploads/2045/iklIbRB9CPEOkEq.png "Список задач")
 
@@ -34,7 +32,7 @@
 Запускаются функции именно в такой последовательности. Помимо этого, в AbstractParser прописана логика получения данных по url из задания. Рекомендуется переписать AbstractParser для своих нужд.
 
 #### Пример парсера
-```
+```php
 <?php
 
 namespace EvolutionCMS\Scraper\Services\Parsers;
@@ -110,7 +108,7 @@ class FourPdaParser extends AbstractParser
 Обработка задания со статусом Created, Unfinished или Completed.
 
 ```php artisan scraper:process --ignore-timestamp```
-Игнорирует поле метки времени (по-умолчанию обрабатываются задания, timestamp которых не указывает на дату из будущего).
+Игнорирует поле метки времени (по умолчанию обрабатываются задания, timestamp которых не указывает на дату из будущего).
 
 ```php artisan scraper:mark-tasks```
 Меняет статус всех Completed заданий без документов на Created.
