@@ -25,7 +25,7 @@
             <a href="/manager/index.php?a=27&id={{ $item->site_content_id }}">{{ $item->site_content_id }}</a>
         @endisset
     </td>
-    <td class="text-truncate">{{ $item->timestamp->diffForHumans() }}</td>
+    <td class="text-truncate">{{ $item->timestamp }}</td>
     <td class="text-truncate">{{ $item->created_at->diffForHumans() }}</td>
     <td>
         <div class="d-flex" style="gap: 0.15rem;">

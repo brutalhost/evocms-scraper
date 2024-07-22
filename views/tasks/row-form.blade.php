@@ -68,7 +68,7 @@
         <label class="sr-only" for="{{ $formName }}_timestamp">{{ __('scraper::global.processing_date') }}</label>
         <input class="form-control" type="datetime-local" name="timestamp"
                id="{{ $formName }}_timestamp"
-               value="{{ old('timestamp', $task->timestamp->format('Y-m-d\TH:i')) }}">
+               value="{{ old('timestamp', $task->timestamp) }}">
         @error('timestamp')
         <small class="form-text text-danger">{{ $message }}</small>
         @enderror
