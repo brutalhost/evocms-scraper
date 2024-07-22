@@ -2,6 +2,7 @@
 
 namespace EvolutionCMS\Scraper\Controllers\Tasks;
 
+use EvolutionCMS\Facades\Console;
 use EvolutionCMS\Scraper\Models\Task;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class MassActions extends Controller
     public function process(Request $request)
     {
         foreach ($this->tasks as $task) {
-            exec('cd "'.EVO_CORE_PATH.'" && php artisan scraper:process '.$task->id);
+            Console::call('scraper:process '.$task->id);
         }
 
         session()->flash('success', trans_choice('scraper::global.tasks_processed', 2));
